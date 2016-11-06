@@ -7,7 +7,6 @@
     </head>
     
     <body>
-        allo
         <script type="text/javascript" src="js/script.js"></script>
 
 		<?php include 'test.php';?>
