@@ -4,11 +4,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>TODO</title>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/ol.css" />
+		<script type="text/javascript" src="js/ol.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
     </head>
     
     <body>
-        <script type="text/javascript" src="js/script.js"></script>
-
-		<?php include 'test.php';?>
+		<!-- This div contains the map, empty at this point -->
+		<div id="map" class="map"></div>
+		
+		<!-- Initialize the map -->
+		<script type="text/javascript">//initMap();</script>
+		
+		<!-- Get the aurora data in JS -->
+		<script type="text/javascript">
+			var data = <?php include 'test.php';?>;
+			console.log(data);
+		</script>
+		
     </body>
 </html>
