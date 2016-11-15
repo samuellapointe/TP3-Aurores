@@ -12,17 +12,17 @@
     <body>
 		<!-- This div contains the map, empty at this point -->
 		<div id="map" class="map"></div>
-
+		
+		<br />
 		<canvas id="myCanvas" width="1024" height="512"></canvas>
 		
 		<!-- Initialize the map -->
-		<script type="text/javascript">//initMap();</script>
+		<script type="text/javascript">initMap();</script>
 		
 		<!-- Get the aurora data in JS -->
 		<script type="text/javascript">
 			var data = <?php include 'test.php';?>;
-			renderData2(data);
-			//renderData(data);
+			renderData(data);
 		</script>
 		
     </body>
