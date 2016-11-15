@@ -11,7 +11,7 @@ function initMap() {
 		],
 		target: 'map',
 		view: new ol.View({
-			center: [0, 0],
+			center: [0, 10000000],
 			zoom: 2
 		})
 	});

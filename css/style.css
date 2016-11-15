@@ -1,1 +1,11 @@
-﻿
+﻿body {
+	background-color: black;
+}
+
+div#map {
+	width: 800px;
+	height: 400px;
+	
+	margin-left: auto;
+	margin-right: auto;
+}
