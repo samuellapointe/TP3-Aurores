@@ -4,7 +4,9 @@ function initMap() {
 	map = new ol.Map({
 		layers: [
 			new ol.layer.Tile({
-				source: new ol.source.OSM()
+				source: new ol.source.OSM({
+					wrapX: false
+				})
 			})
 		],
 		target: 'map',
@@ -27,7 +29,9 @@ function renderData(data) {
 			if (data[y][x] != 0) {
 				var fillString = generateColorFromValue(data[y][x]);
 				context.fillStyle = fillString;
-				context.fillRect(x, y, 1, 1);
+				var movedX = (x + 512) % 1024;
+				var movedY = 512 - y;
+				context.fillRect(x, movedY, 1, 1);
 			}
 		}
 	}
