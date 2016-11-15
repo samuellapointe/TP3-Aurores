@@ -17,18 +17,32 @@ function initMap() {
 
 function renderData2(data) {
 	var context = document.getElementById("myCanvas").getContext("2d");
-	context.fillStyle = "rgba(0, 0, 0.25, 1)";
+	context.fillStyle = "rgba(0, 0, 0, 1)";
 	context.fillRect(0, 0, 1024, 512);
 
 	for (var y = 0; y < 512; y++) {
 		for (var x = 0; x < 1024; x++) {
 			if (data[y][x] != 0) {
-				var fillString = "rgba(" + data[y][x] * 8 + ", " + data[y][x] * 32 + ", 1, 1)";
+				var fillString = generateColorFromValue(data[y][x]);
 				context.fillStyle = fillString;
 				context.fillRect(x, y, 1, 1);
 			}
 		}
 	}
+}
+
+// Generate a color from a 0 to 100 value in a green to red gradient
+// Function taken from http://stackoverflow.com/a/17268489
+function generateColorFromValue(value) {
+	normalizedValue = value / 100; // Normalize
+	var hue=((1-normalizedValue)*120).toString(10);
+	
+	// Get luminosity gradient from 0 to 50
+	var luminosity = value;
+	luminosity = luminosity > 50 ? 50 : luminosity; // Cap at 50%
+	luminosity = luminosity.toString(10) + "%";
+
+    return ["hsl(" + hue + ",100%," + luminosity + ")"].join("");
 }
 
 function renderData(data) {
