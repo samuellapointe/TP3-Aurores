@@ -5,6 +5,7 @@
         <title>TODO</title>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" type="text/css" href="css/ol.css" />
+		<script type="text/javascript" src="js/proj4.js"></script>
 		<script type="text/javascript" src="js/ol.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
     </head>
@@ -14,7 +15,7 @@
 		<div id="map" class="map"></div>
 		
 		<br />
-		<canvas id="myCanvas" width="1024" height="512"></canvas>
+		<canvas style="display: none" id="myCanvas" width="1024" height="512"></canvas>
 		
 		<!-- Initialize the map -->
 		<script type="text/javascript">initMap();</script>

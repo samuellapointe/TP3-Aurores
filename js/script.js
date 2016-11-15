@@ -13,6 +13,7 @@ function initMap() {
 			zoom: 2
 		})
 	});
+	proj4.defs("EPSG:3410","+proj=cea +lon_0=0 +lat_ts=30 +x_0=0 +y_0=0 +a=6371228 +b=6371228 +units=m +no_defs");
 }
 
 function renderData(data) {
@@ -32,7 +33,9 @@ function renderData(data) {
 	}
 	
 	var projection = ol.proj.get('EPSG:4326');
-	var worldExtent = projection.getWorldExtent();
+	console.log(projection);
+	var worldProjection = ol.proj.get('EPSG:4326');
+	var worldExtent = worldProjection.getWorldExtent();
 	
 	var imageLayer = new ol.layer.Image({
 		source: new ol.source.ImageStatic({
