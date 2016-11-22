@@ -7,23 +7,8 @@ var mouseUpdate = function()
     function(coords) {
 		var output = "";
 		output += "Coordinates on map: " + ol.coordinate.toStringXY(coords,4);
-		
-		// Between -180 and 180
-		var normalizedPositionX = (coords[0] / 360) + 0.5;
-		// Between -85 and 85
-		var normalizedPositionY = (coords[1] / 180) + 0.5;
-		
-		// Grid position
-		gridX = Math.floor(normalizedPositionX * 1024);
-		gridY = Math.floor(normalizedPositionY * 512);
-		
-		if (gridX > 1024 || gridX < 0 || gridY > 512 || gridY < 0) 
-		{
-			return "Cursor outside the map bounds";
-		}
-		
-		// Probability
-		var probability = globalData[gridY][gridX];
+	
+		var probability = getProbabilityFromCoordinates(coords);
 		
 		output += "<br />Probability of seeing the ";
 		output += coords[1] > 0 ? "northern" : "southern";
@@ -33,6 +18,27 @@ var mouseUpdate = function()
 		
       return output;
   });        
+}
+
+function getProbabilityFromCoordinates(coords)
+{
+	// Between -180 and 180
+	var normalizedPositionX = (coords[0] / 360) + 0.5;
+	// Between -85 and 85
+	var normalizedPositionY = (coords[1] / 180) + 0.5;
+	
+	// Grid position
+	gridX = Math.floor(normalizedPositionX * 1024);
+	gridY = Math.floor(normalizedPositionY * 512);
+	
+	if (gridX > 1024 || gridX < 0 || gridY > 512 || gridY < 0) 
+	{
+		return "Cursor outside the map bounds";
+	}
+	
+	// Probability
+	var probability = globalData[gridY][gridX];
+	return probability;
 }
 
 function initMap() {
