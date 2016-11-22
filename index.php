@@ -15,13 +15,14 @@
 		
 		<br />
 		<canvas style="display: none" id="myCanvas" width="1024" height="512"></canvas>
+		<div id="mouse-position"></div>
 		
 		<!-- Initialize the map -->
 		<script type="text/javascript">initMap();</script>
 		
 		<!-- Get the aurora data in JS -->
 		<script type="text/javascript">
-			var data = <?php include 'test.php';?>;
+			var data = <?php include 'parseData.php';?>;
 			renderData(data);
 		</script>
 		

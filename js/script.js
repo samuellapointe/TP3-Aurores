@@ -1,7 +1,53 @@
 ﻿var map;
+var globalData;
+
+var mouseUpdate = function()
+{
+  return (
+    function(coords) {
+		var output = "";
+		output += "Coordinates on map: " + ol.coordinate.toStringXY(coords,4);
+		
+		// Between -180 and 180
+		var normalizedPositionX = (coords[0] / 360) + 0.5;
+		// Between -85 and 85
+		var normalizedPositionY = (coords[1] / 180) + 0.5;
+		
+		// Grid position
+		gridX = Math.floor(normalizedPositionX * 1024);
+		gridY = Math.floor(normalizedPositionY * 512);
+		
+		if (gridX > 1024 || gridX < 0 || gridY > 512 || gridY < 0) 
+		{
+			return "Cursor outside the map bounds";
+		}
+		
+		// Probability
+		var probability = globalData[gridY][gridX];
+		
+		output += "<br />Probability of seeing the ";
+		output += coords[1] > 0 ? "northern" : "southern";
+		output += " lights: ";
+		output += probability;
+		output += "%";
+		
+      return output;
+  });        
+}
 
 function initMap() {
+	var mousePositionControl = new ol.control.MousePosition({
+        coordinateFormat: mouseUpdate(),
+        projection: 'EPSG:4326',
+        // comment the following two lines to have the mouse position
+        // be placed within the map.
+        className: 'custom-mouse-position',
+        target: document.getElementById('mouse-position'),
+        undefinedHTML: '&nbsp;'
+      });
+	  
 	map = new ol.Map({
+		controls: ol.control.defaults().extend([mousePositionControl]),
 		layers: [
 			new ol.layer.Tile({
 				source: new ol.source.OSM({
@@ -18,6 +64,8 @@ function initMap() {
 }
 
 function renderData(data) {
+	globalData = data;
+	
 	var canvas = document.getElementById("myCanvas");
 	var context = canvas.getContext("2d");
 	context.fillStyle = "rgba(0, 0, 0, 0)";
