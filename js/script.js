@@ -51,15 +51,24 @@ function initMap() {
         target: document.getElementById('mouse-position'),
         undefinedHTML: '&nbsp;'
       });
-	  
+	
+	var attribution = new ol.Attribution({
+		html: '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+	});
+	
 	map = new ol.Map({
 		controls: ol.control.defaults().extend([mousePositionControl]),
 		layers: [
 			new ol.layer.Tile({
-				source: new ol.source.OSM({
+				source: new ol.source.XYZ({
+					attributions: [
+						attribution,
+						ol.source.OSM.ATTRIBUTION
+					],
+					url: 'http://{a-c}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
 					wrapX: false
-				})
-			})
+					})
+				}),
 		],
 		target: 'map',
 		view: new ol.View({
